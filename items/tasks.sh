@@ -17,6 +17,6 @@ sketchybar --add item task right \
 	background.color="$BAR_COLOR" \
 	background.drawing=on \
 	script="$PLUGIN_DIR/task.sh" \
-	click_script="task 1 done &> /dev/null; sketchybar --trigger task_update"
+	click_script="task $(task _get $(task list limit:1 | awk 'NR==4 {print $1}').id 2>/dev/null) done &> /dev/null; sketchybar --trigger task_update"
 
 sketchybar --subscribe task task_update system_woke

@@ -9,7 +9,7 @@ MAX_LENGTH=45
 
 # Get the description of the task with ID 1.
 # We redirect stderr to /dev/null to hide the "No task with ID 1." error if it occurs.
-DESCRIPTION=$(task _get 1.description 2>/dev/null)
+DESCRIPTION=$(task _get $(task list limit:1 | awk 'NR==4 {print $1}').description 2>/dev/null)
 
 # Check if a description was returned.
 if [[ -z "$DESCRIPTION" ]]; then
